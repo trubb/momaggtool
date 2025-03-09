@@ -1,0 +1,77 @@
+# The basic list of funds called "standard" in aztest
+
+[[funds]]
+aza_id = 206
+name = "Swedbank Robur Access Mix A"
+
+[[funds]]
+aza_id = 347
+name = "Swedbank Robur Fastighet A"
+
+[[funds]]
+aza_id = 350
+name = "Länsförsäkringar Fastighetsfond A"
+
+[[funds]]
+aza_id = 464
+name = "Handelsbanken Hälsovård Tema (A1 SEK)"
+
+[[funds]]
+aza_id = 1678
+name = "Swedbank Robur Småbolagsfond Norden A"
+
+[[funds]]
+aza_id = 1933
+name = "Swedbank Robur Ny Teknik A"
+
+[[funds]]
+aza_id = 2111
+name = "AMF Räntefond Lång"
+
+[[funds]]
+aza_id = 2128
+name = "Storebrand Obligation A SEK"
+
+[[funds]]
+aza_id = 2802
+name = "AMF Räntefond Kort"
+
+[[funds]]
+aza_id = 56127
+name = "Simplicity Likviditet A"
+
+[[funds]]
+aza_id = 255288
+name = "Handelsbanken Realränta (A1 SEK)"
+
+[[funds]]
+aza_id = 512559
+name = "Handelsbanken Hållbar Energi (A1 SEK)"
+
+[[funds]]
+aza_id = 789175
+name = "PLUS Småbolag Sverige Index"
+
+[[funds]]
+aza_id = 799913
+name = "Handelsbanken Global Småbolag Index (A1 SEK)"
+
+[[funds]]
+aza_id = 933765
+name = "Swedbank Robur Small Cap EM A"
+
+[[funds]]
+aza_id = 1509080
+name = "DNB Finans S"
+
+[[funds]]
+aza_id = 1534742
+name = "DNB Bioteknologi S"
+
+[[funds]]
+aza_id = 1891848
+name = "SEB Korträntefond C USD - Lux"
+
+# [[funds]]
+# aza_id = 18988
+# name = "OMXSPI"
