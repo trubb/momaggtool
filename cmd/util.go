@@ -66,7 +66,8 @@ func parseFunds(filePath string) ([]Fund, error) {
 	if err != nil {
 		return nil, err
 	}
-	slog.Debug("Parsed funds", "funds", fmt.Sprintf("%+v", funds))
+
+	// slog.Debug("Parsed funds", "funds", fmt.Sprintf("%+v", funds))
 
 	// TODO there ought to be a more correct way to parse the file directly into an array of Funds
 	return funds.Funds, nil

@@ -68,6 +68,7 @@ name = "DNB Finans S"
 aza_id = 1534742
 name = "DNB Bioteknologi S"
 
+# TODO this one will HTTP 400 if you look too far back, handle it via some kind of retry looking for say 3-4 months of data for at least the SMA3p
 [[funds]]
 aza_id = 1891848
 name = "SEB Korträntefond C USD - Lux"

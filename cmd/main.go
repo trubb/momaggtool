@@ -77,14 +77,27 @@ func (conf *Config) init(c *cli.Context) error {
 	return nil
 }
 
-func (a *Config) start() error {
+func (conf *Config) start() error {
 	slog.Debug("Starting")
 
-	// TODO retrieve fund data
+	fundData, err := retrieveFundsData(conf.Funds)
+	if err != nil {
+		slog.Error("Failed to retrieve some or all data", "error", err)
+		if len(fundData) == 0 {
+			return err
+		}
+	}
+	slog.Debug("Retrieved data", "data", fmt.Sprintf("%+v", fundData), "len", len(fundData))
 
-	// TODO calculate performance, SMA3 etc from retrieved fund data
+	// TODO calculate performance, SMA3 etc from retrieved data
+	perf, err := calculatePerformance(fundData)
+	if err != nil {
+		slog.Error("Failed to calculate performance", "error", err)
+		return err
+	}
+	_ = perf
 
-	// TODO output results
+	// TODO output results sorted by performance
 
 	return nil
 }
