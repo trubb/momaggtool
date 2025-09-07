@@ -12,12 +12,23 @@ import (
 )
 
 // sets up the slog handler for the application
+//
+// TODO colorize errors
+// TODO colorize a few things in display.go if possible
 func slogHandler(level string) slog.Handler {
-	// TODO make the function care about level
+	lvl := slog.LevelInfo
 	if level != "" {
 		switch level {
 		case "debug":
-			_ = slog.LevelDebug
+			lvl = slog.LevelDebug
+		case "info":
+			lvl = slog.LevelInfo
+		case "warn":
+			lvl = slog.LevelWarn
+		case "error":
+			lvl = slog.LevelError
+		default:
+			lvl = slog.LevelInfo
 		}
 	}
 
@@ -29,12 +40,17 @@ func slogHandler(level string) slog.Handler {
 				return slog.String("src", fmt.Sprintf("%s:%d", filepath.Join(filepath.Base(dir), file), source.Line))
 			}
 		}
+		if attr.Value.Kind() == slog.KindAny {
+			if _, ok := attr.Value.Any().(error); ok {
+				return tint.Attr(9, attr)
+			}
+		}
 		return attr
 	}
 
 	return tint.NewHandler(os.Stderr, &tint.Options{
 		AddSource:   true,
-		Level:       slog.LevelDebug,
+		Level:       lvl,
 		TimeFormat:  time.DateTime,
 		ReplaceAttr: prettySource,
 	})
@@ -67,8 +83,14 @@ func parseFunds(filePath string) ([]Fund, error) {
 		return nil, err
 	}
 
-	// slog.Debug("Parsed funds", "funds", fmt.Sprintf("%+v", funds))
-
 	// TODO there ought to be a more correct way to parse the file directly into an array of Funds
 	return funds.Funds, nil
+}
+
+func repeat(s string, count int) string {
+	result := ""
+	for range count {
+		result += s
+	}
+	return result
 }
