@@ -43,7 +43,7 @@ func main() {
 
 func run(c *cli.Context) error {
 	// TODO set log level from arg
-	slog.SetDefault(slog.New(slogHandler("")))
+	// slog.SetDefault(slog.New(slogHandler("")))
 
 	slog.Info("Running momaggtool")
 
@@ -69,7 +69,7 @@ func run(c *cli.Context) error {
 		}
 	}
 
-	err := svc.init(c)
+	err := svc.init()
 	if err != nil {
 		return err
 	}
@@ -84,7 +84,7 @@ func run(c *cli.Context) error {
 	return nil
 }
 
-func (svc *Service) init(c *cli.Context) error {
+func (svc *Service) init() error {
 
 	slog.Debug("Initializing")
 
@@ -128,18 +128,21 @@ func (svc *Service) start() error {
 		)
 	}
 
-	err = display(svc.FundInfo)
-	if err != nil {
-		slog.Error("Failed to display results", "error", err)
-		return err
-	}
+	ordered := order(svc.FundInfo)
+	print(ordered)
 
 	// TODO Fetch UNRATE
+	unrate, unrateMa12, unrateTriggered, err := handleUnrate(svc.ctx)
+	if err != nil {
+		return fmt.Errorf("failed to fetch UNRATE data: %w", err)
+	}
 
-	// TODO pick top 3 funds based on our criteria
-	// reuse print() but the set that is finally picked may differ from the ordered list
-	// due to SMA distance etc
-	// which is triggered by BLS UNRATE statistics
+	slog.Info("Fetched UNRATE data", "unrate", unrate, "unrateMa12", unrateMa12, "above ma12?", unrateTriggered)
+
+	err = handleSelection(ordered, unrateTriggered)
+	if err != nil {
+		return fmt.Errorf("failed while trying to select funds: %w", err)
+	}
 
 	return nil
 }

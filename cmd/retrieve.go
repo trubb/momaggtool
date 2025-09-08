@@ -181,9 +181,7 @@ func retrieveFundsPerformance(ctx context.Context, azaID int) (AzaPerformance, e
 	if err != nil {
 		return AzaPerformance{}, fmt.Errorf("failure to decode fund '%d', err: %w", azaID, err)
 	}
-	fmt.Println()
 	slog.Debug("retrieved performance data", "fund", azaID, "data", fmt.Sprintf("%+v", response))
-	fmt.Println()
 
 	return response, nil
 }

@@ -5,15 +5,6 @@ import (
 	"sort"
 )
 
-// TODO is this really needed, can't we call order and print from main?
-func display(funds map[int]FundInfo) error {
-	ordered := order(funds)
-
-	print(ordered)
-
-	return nil
-}
-
 func order(funds map[int]FundInfo) []FundInfo {
 	toOrder := make([]FundInfo, 0, len(funds))
 
